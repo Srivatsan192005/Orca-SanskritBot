@@ -39,7 +39,10 @@ export default function Header({
         <div className="header-main-inner">
           {/* Brand */}
           <div className="brand-group">
-            <div className="brand-logo-box">ORCA</div>
+            <div className="brand-logo-box">
+              <span className="brand-om-icon">ॐ</span>
+              <span className="brand-logo-text">ORCA</span>
+            </div>
             <div className="brand-text-block">
               <div className="brand-heading-row">
                 <h1 className="brand-main-name">Sanskrit Guru AI</h1>
