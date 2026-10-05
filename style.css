@@ -1,0 +1,1617 @@
+/* ==========================================================================
+   ORCA — Sanskrit Guru AI: Academic Minimalist Stylesheet
+   Design Philosophy: Clean, rigid, minimal educational interface.
+   No gradients, no glassmorphism, no excessive animations, no hover transforms.
+   Strict adherence to academic typography, clear borders, flat palette.
+   ========================================================================== */
+
+/* 1. CSS Reset & Variables */
+:root {
+  /* Color Palette */
+  --color-primary: #2E7D32;       /* Forest Academic Green */
+  --color-primary-dark: #1B5E20;
+  --color-primary-light: #E8F5E9;
+  
+  --color-secondary: #1565C0;     /* Academic Blue */
+  --color-secondary-dark: #0D47A1;
+  --color-secondary-light: #E3F2FD;
+  
+  --color-accent: #FFB300;        /* Educational Warm Amber */
+  --color-accent-light: #FFF8E1;
+  
+  --color-warn: #C62828;          /* Alert Crimson */
+  --color-warn-light: #FFEBEE;
+  
+  --color-bg-canvas: #F4F6F5;     /* Neutral Academic Background */
+  --color-bg-frame: #FFFFFF;      /* Clean White Card/App Frame */
+  --color-bg-subtle: #F8FAF9;     /* Subtle Off-White Section BG */
+  
+  --color-text-main: #111827;     /* High-contrast Near Black */
+  --color-text-muted: #4B5563;    /* Professional Medium Gray */
+  --color-text-light: #6B7280;    /* Secondary Descriptor Gray */
+  
+  --color-border: #D1D5DB;        /* Crisp Rigid Border */
+  --color-border-dark: #9CA3AF;
+  
+  /* Typography */
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sanskrit: 'Noto Sans Devanagari', 'Yantramanav', sans-serif;
+  
+  /* Layout Dimensions */
+  --mobile-width: 390px;
+  --mobile-height: 844px;
+  --header-height: 86px;
+  --bottom-nav-height: 64px;
+  --radius-rigid: 4px;            /* Slight rounded corners as requested */
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-ui);
+  background-color: var(--color-bg-canvas);
+  color: var(--color-text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2. Top Academic Department Banner (Desktop Context) */
+.academic-top-bar {
+  background-color: #1E293B;
+  color: #F8FAFC;
+  padding: 10px 20px;
+  border-bottom: 2px solid var(--color-primary);
+  font-size: 13px;
+}
+
+.top-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.project-institution {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge-dept {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.project-title {
+  font-weight: 500;
+  color: #E2E8F0;
+}
+
+.view-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.device-label {
+  color: #94A3B8;
+  font-size: 12px;
+}
+
+.btn-toggle-view {
+  background-color: #334155;
+  color: #FFFFFF;
+  border: 1px solid #475569;
+  padding: 4px 10px;
+  border-radius: var(--radius-rigid);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* 3. Mobile Viewport Container (Centering frame on Desktop, 390x844 px) */
+.mobile-viewport-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px 10px;
+  flex: 1;
+}
+
+.mobile-viewport-container.fullscreen-mode {
+  padding: 0;
+}
+
+.mobile-viewport-container.fullscreen-mode .app-frame {
+  max-width: 680px;
+  height: calc(100vh - 46px);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.app-frame {
+  width: 100%;
+  max-width: var(--mobile-width);
+  height: var(--mobile-height);
+  background-color: var(--color-bg-frame);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+/* 4. App Header */
+.app-header {
+  background-color: #FFFFFF;
+  border-bottom: 2px solid var(--color-primary);
+  padding: 14px 16px;
+  flex-shrink: 0;
+}
+
+.header-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.logo-box {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: var(--radius-rigid);
+  line-height: 1.2;
+}
+
+.brand-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.2;
+}
+
+.brand-tagline {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.header-subtitle {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  line-height: 1.35;
+  margin-top: 4px;
+}
+
+/* 5. Screen Views & Screen Container */
+.screen-view {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--color-bg-subtle);
+}
+
+.screen-view.active {
+  display: flex;
+}
+
+.screen-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 14px 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 6. Rigid Content Cards */
+.content-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-rigid);
+  padding: 14px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.card-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.screen-header-block {
+  margin-bottom: 2px;
+}
+
+.screen-subtitle-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+}
+
+.screen-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+/* 7. Home Screen Elements */
+.assistant-callout-card {
+  background-color: var(--color-primary-light);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-rigid);
+  padding: 12px 14px;
+}
+
+.card-header-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.card-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-primary-dark);
+}
+
+.status-indicator {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  display: inline-block;
+}
+
+.callout-dialogue {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--color-text-main);
+  margin-bottom: 10px;
+}
+
+.btn-assistant-open {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border: 1px solid var(--color-primary-dark);
+  border-radius: var(--radius-rigid);
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  justify-content: center;
+}
+
+.lesson-main-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 12px;
+}
+
+.sanskrit-display-box {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  padding: 16px;
+  text-align: center;
+  border-radius: var(--radius-rigid);
+  margin-bottom: 12px;
+}
+
+.sanskrit-phrase {
+  font-family: var(--font-sanskrit);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  display: block;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+.sanskrit-meaning {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.sanskrit-phonetics {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-family: monospace;
+}
+
+/* Dual Actions Row */
+.dual-actions-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-primary-action {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border: 1px solid var(--color-primary-dark);
+  border-radius: var(--radius-rigid);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-primary-action.btn-listen {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary-dark);
+}
+
+.btn-primary-action.btn-practice {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary-dark);
+}
+
+.btn-secondary-flat {
+  background-color: #FFFFFF;
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-rigid);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Progress Item Block & Flat Progress Bars */
+.progress-item-block {
+  margin-bottom: 12px;
+}
+
+.progress-header-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.metric-label {
+  color: var(--color-text-muted);
+}
+
+.metric-value {
+  color: var(--color-text-main);
+}
+
+.progress-bar-track {
+  width: 100%;
+  height: 8px;
+  background-color: #E5E7EB;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid #D1D5DB;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--color-primary);
+}
+
+.progress-bar-fill.fill-secondary {
+  background-color: var(--color-secondary);
+}
+
+.progress-bar-fill.fill-accent {
+  background-color: var(--color-accent);
+}
+
+.stats-mini-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 12px 0 8px 0;
+}
+
+.stat-mini-box {
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  padding: 8px;
+  text-align: center;
+  border-radius: var(--radius-rigid);
+}
+
+.stat-mini-num {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  display: block;
+}
+
+.stat-mini-title {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.btn-view-details {
+  background: none;
+  border: none;
+  color: var(--color-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0;
+  display: inline-block;
+  text-decoration: underline;
+}
+
+.mini-lesson-list {
+  list-style: none;
+  font-size: 13px;
+}
+
+.mini-lesson-list li {
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.mini-lesson-list li:last-child {
+  border-bottom: none;
+}
+
+.lesson-num {
+  font-weight: 700;
+  width: 24px;
+  color: var(--color-text-light);
+}
+
+.lesson-name {
+  flex: 1;
+}
+
+.tag-status {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.tag-status.done {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border: 1px solid var(--color-primary);
+}
+
+.tag-status.next {
+  background-color: var(--color-secondary-light);
+  color: var(--color-secondary-dark);
+  border: 1px solid var(--color-secondary);
+}
+
+.tag-status.pending {
+  background-color: #F3F4F6;
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border);
+}
+
+/* 8. Screen 2: Lesson Screen */
+.lesson-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-back-nav {
+  background: none;
+  border: 1px solid var(--color-border);
+  padding: 4px 10px;
+  border-radius: var(--radius-rigid);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  background-color: #FFFFFF;
+}
+
+.lesson-badge {
+  font-size: 11px;
+  background-color: #E2E8F0;
+  color: #334155;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.word-stage-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--color-text-light);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.prominent-sanskrit-container {
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 14px;
+  margin-bottom: 12px;
+}
+
+.sanskrit-hero-word {
+  font-family: var(--font-sanskrit);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  line-height: 1.2;
+  margin: 6px 0 10px 0;
+}
+
+.sanskrit-detail-line {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.detail-label {
+  color: var(--color-text-light);
+  margin-right: 6px;
+}
+
+.detail-text {
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.phonetic-script {
+  font-family: monospace;
+  font-size: 13px;
+  color: var(--color-secondary);
+}
+
+.phoneme-breakdown-box {
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  padding: 10px;
+  border-radius: var(--radius-rigid);
+}
+
+.breakdown-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.syllables-row {
+  display: flex;
+  gap: 6px;
+}
+
+.syllable-chip {
+  flex: 1;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  padding: 4px 6px;
+  text-align: center;
+  font-size: 12px;
+  font-family: monospace;
+  border-radius: 2px;
+}
+
+.syllable-chip.highlight {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent-light);
+  font-weight: 700;
+}
+
+/* Voice Controls in Lesson Screen */
+.voice-controls-card {
+  text-align: center;
+}
+
+.btn-listen-large {
+  width: 100%;
+  background-color: var(--color-secondary);
+  color: #FFFFFF;
+  border: 1px solid var(--color-secondary-dark);
+  border-radius: var(--radius-rigid);
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.voice-hint {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin: 6px 0 16px 0;
+}
+
+.divider-rigid {
+  border-top: 1px solid var(--color-border);
+  margin: 12px 0 16px 0;
+  position: relative;
+  text-align: center;
+}
+
+.divider-rigid span {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #FFFFFF;
+  padding: 0 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+}
+
+.btn-mic-large {
+  width: 100%;
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border: 1px solid var(--color-primary-dark);
+  border-radius: var(--radius-rigid);
+  padding: 16px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.voice-instruction {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-main);
+  margin-top: 8px;
+}
+
+/* Live Recording Box */
+.recording-live-box {
+  background-color: var(--color-warn-light);
+  border: 1px solid var(--color-warn);
+  border-radius: var(--radius-rigid);
+  padding: 12px;
+  margin-top: 12px;
+}
+
+.live-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-warn);
+  margin-bottom: 8px;
+}
+
+.pulse-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-warn);
+}
+
+.audio-level-track {
+  width: 100%;
+  height: 6px;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-warn);
+  margin-bottom: 10px;
+}
+
+.audio-level-bar {
+  height: 100%;
+  width: 45%;
+  background-color: var(--color-warn);
+}
+
+/* 9. Screen 3: Pronunciation Analysis */
+.analysis-target-card {
+  text-align: center;
+}
+
+.analysis-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.target-phonetics {
+  font-family: monospace;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.target-word-prominent {
+  font-family: var(--font-sanskrit);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin: 4px 0 12px 0;
+}
+
+.result-banner {
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  padding: 12px;
+  border-radius: var(--radius-rigid);
+}
+
+.result-evaluation {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.eval-label {
+  color: var(--color-text-muted);
+}
+
+.eval-badge {
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+.eval-badge.good {
+  color: var(--color-primary);
+}
+
+.eval-badge.average {
+  color: #B45309;
+}
+
+.score-display {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.score-number {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-secondary);
+}
+
+.score-caption {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+/* Feedback Categories */
+.feedback-checks-list {
+  list-style: none;
+  margin-bottom: 14px;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 13px;
+  font-weight: 500;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.check-item:last-child {
+  border-bottom: none;
+}
+
+.check-pass .check-icon {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.check-warn .check-icon {
+  color: #D97706;
+  font-weight: 700;
+}
+
+.ai-feedback-box {
+  background-color: var(--color-secondary-light);
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--radius-rigid);
+  padding: 12px;
+}
+
+.feedback-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: var(--color-secondary);
+  color: #FFFFFF;
+  padding: 2px 6px;
+  border-radius: 2px;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.feedback-badge.warning {
+  background-color: #B45309;
+}
+
+.feedback-quote {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-secondary-dark);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.audio-replay-row {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-inline-replay {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-secondary);
+  color: var(--color-secondary-dark);
+  padding: 5px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: var(--radius-rigid);
+  cursor: pointer;
+}
+
+/* Conceptual NLP Pipeline Card */
+.nlp-pipeline-card {
+  background-color: #F8FAFC;
+  border: 1px solid var(--color-border);
+}
+
+.pipeline-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.pipeline-step {
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+.pipeline-step.done {
+  color: var(--color-primary);
+}
+
+.pipeline-step.active {
+  background-color: var(--color-secondary);
+  color: #FFFFFF;
+}
+
+.pipeline-arrow {
+  color: var(--color-border-dark);
+}
+
+.actions-card-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* 10. Screen 4: Practice Mode */
+.practice-card {
+  text-align: center;
+}
+
+.sentence-instruction {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.prominent-sentence-box {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  padding: 14px 10px;
+  border-radius: var(--radius-rigid);
+  margin-bottom: 12px;
+}
+
+.sanskrit-sentence {
+  font-family: var(--font-sanskrit);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 4px;
+}
+
+.sentence-translation {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 2px;
+}
+
+.sentence-phonetic-guide {
+  font-size: 12px;
+  font-family: monospace;
+  color: var(--color-text-light);
+}
+
+.btn-listen-sentence {
+  width: 100%;
+  background-color: var(--color-secondary);
+  color: #FFFFFF;
+  border: 1px solid var(--color-secondary-dark);
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius-rigid);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Practice Recording State Card */
+.recording-state-card {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.state-container {
+  width: 100%;
+}
+
+.state-container.hidden {
+  display: none;
+}
+
+.recording-badge-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--color-warn-light);
+  color: var(--color-warn);
+  border: 1px solid var(--color-warn);
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.state-subtext {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+.rigid-audio-meter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  height: 36px;
+  margin-bottom: 16px;
+}
+
+.meter-bar {
+  width: 6px;
+  background-color: var(--color-primary);
+  border-radius: 1px;
+}
+
+.meter-bar.h-1 { height: 10px; }
+.meter-bar.h-2 { height: 16px; }
+.meter-bar.h-3 { height: 24px; }
+.meter-bar.h-4 { height: 30px; }
+.meter-bar.h-5 { height: 36px; }
+
+/* Analyzing State */
+.analyzing-spinner-box {
+  padding: 16px 0;
+}
+
+.spinner-rigid {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #E2E8F0;
+  border-top-color: var(--color-secondary);
+  border-radius: 50%;
+  margin: 0 auto 10px auto;
+  animation: rigid-spin 0.8s linear infinite;
+}
+
+@keyframes rigid-spin {
+  to { transform: rotate(360deg); }
+}
+
+.analyzing-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-secondary-dark);
+}
+
+.analyzing-sub {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+/* Practice Result */
+.practice-result-score-box {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.metric-score {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-secondary);
+  display: block;
+  margin: 2px 0 6px 0;
+}
+
+.diagnostic-feedback-box {
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  padding: 12px;
+  border-radius: var(--radius-rigid);
+  text-align: left;
+  margin-bottom: 14px;
+}
+
+.feedback-statement {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 8px;
+}
+
+.specific-defect-box {
+  font-size: 12px;
+  color: #92400E;
+  background-color: #FEF3C7;
+  border: 1px solid #FDE68A;
+  padding: 6px 8px;
+  border-radius: 2px;
+  display: flex;
+  gap: 6px;
+}
+
+.practice-actions-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Sentence Selector */
+.sentence-pills {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sentence-pill {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 13px;
+  border-radius: var(--radius-rigid);
+  cursor: pointer;
+  color: var(--color-text-main);
+  font-weight: 500;
+}
+
+.sentence-pill.active {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  font-weight: 600;
+}
+
+/* 11. Screen 5: Lesson List */
+.curriculum-tier-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-primary-dark);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 4px;
+  margin-top: 4px;
+}
+
+.lessons-structured-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lesson-entry {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-rigid);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.lesson-entry-num {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-light);
+  width: 26px;
+}
+
+.lesson-entry-body {
+  flex: 1;
+}
+
+.lesson-entry-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.lesson-entry-sanskrit {
+  font-family: var(--font-sanskrit);
+  font-size: 15px;
+  color: var(--color-primary-dark);
+}
+
+.status-pill-completed {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  background-color: var(--color-primary-light);
+  border: 1px solid var(--color-primary);
+  padding: 3px 8px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.btn-start-lesson {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-secondary);
+  color: var(--color-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-rigid);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* 12. Screen 6: Progress */
+.progress-overview-card {
+  text-align: center;
+}
+
+.big-score-center {
+  padding: 6px 0 10px 0;
+}
+
+.score-headline {
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  line-height: 1;
+  display: block;
+}
+
+.score-subtext {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+/* Academic Stats Grid */
+.stats-rigid-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.stat-grid-cell {
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  padding: 10px;
+  border-radius: var(--radius-rigid);
+  text-align: center;
+}
+
+.grid-num {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  display: block;
+}
+
+.grid-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+/* Pronunciation Areas */
+.area-item {
+  margin-bottom: 12px;
+}
+
+.area-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.area-name {
+  color: var(--color-text-main);
+}
+
+.area-percent {
+  color: var(--color-text-muted);
+}
+
+/* Academic Table */
+.academic-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  text-align: left;
+}
+
+.academic-table th {
+  background-color: #F8FAFC;
+  border-bottom: 2px solid var(--color-border);
+  padding: 6px 8px;
+  color: var(--color-text-light);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+.academic-table td {
+  padding: 8px;
+  border-bottom: 1px solid #E5E7EB;
+  color: var(--color-text-main);
+}
+
+/* 13. Reusable Voice Assistant Component Modal / Drawer */
+.assistant-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  display: none;
+}
+
+.assistant-modal.open {
+  display: block;
+}
+
+.assistant-modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(17, 24, 39, 0.5);
+}
+
+.assistant-modal-window {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-height: 85%;
+  background-color: #FFFFFF;
+  border-top: 3px solid var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  z-index: 51;
+}
+
+.assistant-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border);
+  background-color: #FFFFFF;
+}
+
+.assistant-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-right: 8px;
+}
+
+.btn-close-modal {
+  background: none;
+  border: 1px solid var(--color-border);
+  padding: 3px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: var(--radius-rigid);
+  font-weight: 700;
+}
+
+.assistant-dialogue-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: var(--color-bg-subtle);
+  min-height: 220px;
+  max-height: 320px;
+}
+
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  max-width: 88%;
+}
+
+.chat-message.msg-ai {
+  align-self: flex-start;
+}
+
+.chat-message.msg-user {
+  align-self: flex-end;
+}
+
+.msg-sender {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-bottom: 2px;
+}
+
+.chat-message.msg-user .msg-sender {
+  text-align: right;
+}
+
+.msg-bubble {
+  padding: 8px 12px;
+  border-radius: var(--radius-rigid);
+  font-size: 13px;
+  line-height: 1.4;
+  border: 1px solid var(--color-border);
+}
+
+.msg-ai .msg-bubble {
+  background-color: #FFFFFF;
+  color: var(--color-text-main);
+  border-left: 3px solid var(--color-primary);
+}
+
+.msg-user .msg-bubble {
+  background-color: var(--color-secondary-light);
+  color: var(--color-secondary-dark);
+  border-right: 3px solid var(--color-secondary);
+}
+
+.msg-actions-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.btn-chat-action {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border-dark);
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.quick-prompts-bar {
+  display: flex;
+  gap: 6px;
+  padding: 8px 14px;
+  overflow-x: auto;
+  background-color: #FFFFFF;
+  border-top: 1px solid #E5E7EB;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.quick-chip {
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  padding: 4px 8px;
+  font-size: 11px;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: var(--radius-rigid);
+  color: var(--color-text-muted);
+}
+
+.assistant-input-footer {
+  display: flex;
+  gap: 6px;
+  padding: 10px 14px;
+  background-color: #FFFFFF;
+}
+
+.assistant-text-field {
+  flex: 1;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-rigid);
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: var(--font-ui);
+}
+
+.assistant-text-field:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.btn-assistant-send {
+  background-color: #334155;
+  color: #FFFFFF;
+  border: 1px solid #1E293B;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: var(--radius-rigid);
+  cursor: pointer;
+}
+
+.btn-assistant-mic {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border: 1px solid var(--color-primary-dark);
+  padding: 0 12px;
+  font-size: 15px;
+  border-radius: var(--radius-rigid);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 14. Bottom Navigation Bar */
+.bottom-nav {
+  height: var(--bottom-nav-height);
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--color-border);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  color: var(--color-text-light);
+  border-top: 3px solid transparent;
+}
+
+.nav-icon {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.nav-text {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.nav-btn.active {
+  color: var(--color-primary);
+  border-top-color: var(--color-primary);
+}
+
+/* 15. Toast Indicator */
+.toast-indicator {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #1E293B;
+  color: #FFFFFF;
+  padding: 8px 14px;
+  font-size: 12px;
+  border-radius: var(--radius-rigid);
+  z-index: 999;
+}
+
+.toast-indicator.hidden {
+  display: none;
+}
+
+/* 16. Utility Classes */
+.hidden {
+  display: none !important;
+}
