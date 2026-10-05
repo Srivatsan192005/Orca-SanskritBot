@@ -26,11 +26,12 @@ pipeline {
 
         stage('Verify Environment') {
             steps {
-                echo 'Verifying workspace...'
-                sh '''
-                    echo "Build Number: ${BUILD_NUMBER}"
-                    echo "Branch: ${BRANCH_NAME}"
-                    docker --version || true
+                echo 'Verifying Windows workspace and Docker...'
+                bat '''
+                    @echo off
+                    echo Build Number: %BUILD_NUMBER%
+                    echo Branch: %BRANCH_NAME%
+                    docker --version
                 '''
             }
         }
@@ -38,7 +39,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo "Building Docker image: ${APP_NAME}:${IMAGE_TAG}"
-                sh """
+                bat """
                     docker build -t ${APP_NAME}:${IMAGE_TAG} -t ${APP_NAME}:latest .
                 """
             }
@@ -46,22 +47,29 @@ pipeline {
 
         stage('Smoke Test & Health Check') {
             steps {
-                echo 'Spinning up container for smoke testing...'
-                sh """
-                    # Remove any leftover test container
-                    docker rm -f ${APP_NAME}-smoke-test 2>/dev/null || true
+                echo 'Spinning up container for smoke testing on Windows...'
+                bat """
+                    @echo off
+                    :: Remove any lingering test container
+                    docker rm -f ${APP_NAME}-smoke-test >nul 2>&1 || rem
 
-                    # Start container on temporary test port 8089
+                    :: Start container on temporary test port 8089
                     docker run -d --name ${APP_NAME}-smoke-test -p 8089:80 ${APP_NAME}:${IMAGE_TAG}
 
-                    # Wait for container startup
-                    sleep 5
+                    :: Wait for container initialization (5 seconds)
+                    timeout /t 5 /nobreak >nul
 
-                    # Smoke test HTTP endpoint
-                    curl -I http://localhost:8089 || (docker logs ${APP_NAME}-smoke-test && docker rm -f ${APP_NAME}-smoke-test && exit 1)
+                    :: Smoke test HTTP endpoint
+                    curl -I http://localhost:8089
+                    if errorlevel 1 (
+                        echo [ERROR] Smoke test failed!
+                        docker logs ${APP_NAME}-smoke-test
+                        docker rm -f ${APP_NAME}-smoke-test >nul 2>&1
+                        exit /b 1
+                    )
 
-                    # Teardown smoke test container
-                    docker rm -f ${APP_NAME}-smoke-test
+                    echo [SUCCESS] Smoke test passed!
+                    docker rm -f ${APP_NAME}-smoke-test >nul 2>&1
                 """
             }
         }
@@ -73,12 +81,13 @@ pipeline {
                 branch 'main'
             }
             steps {
-                script {
-                    docker.withRegistry('', env.REGISTRY_CREDS) {
-                        def img = docker.image("${REGISTRY_USER}/${APP_NAME}:${IMAGE_TAG}")
-                        img.push()
-                        img.push('latest')
-                    }
+                withCredentials([usernamePassword(credentialsId: env.REGISTRY_CREDS, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    bat """
+                        @echo off
+                        echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
+                        docker push ${REGISTRY_USER}/${APP_NAME}:${IMAGE_TAG}
+                        docker push ${REGISTRY_USER}/${APP_NAME}:latest
+                    """
                 }
             }
         }
